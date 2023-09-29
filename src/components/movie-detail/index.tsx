@@ -1,3 +1,5 @@
+import React from "react"
+
 import { RatingContainer } from "./styles"
 
 const sampleMovie = {
@@ -44,10 +46,9 @@ const sampleMovie = {
 const MovieDetailPage = () => {
     return (
         <>
-            <RatingContainer>
-            </RatingContainer> 
+           Movie detail page
         </>
     )
 }
 
-export const MovieDetailPage
+export default MovieDetailPage
