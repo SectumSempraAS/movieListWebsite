@@ -15,7 +15,7 @@ function App() {
           }
         />
         <Route
-          path="/movie-detail/:id"
+          path="/movieDetail/:id"
           element={
             <MovieDetailPage />
           }

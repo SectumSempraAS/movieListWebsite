@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import { MediaTransport } from "../transports";
 
 interface FavMoviesContextTransport {
@@ -8,7 +8,7 @@ interface FavMoviesContextTransport {
 
 const FavMoviesContext = createContext({} as FavMoviesContextTransport)
 
-const FavMoviesContextProvider = ({props}: any) => {
+const FavMoviesContextProvider = ({children}: any) => {
     const [favMovies, setFavMovies] = useState(() => {
             const storedMovies = localStorage.getItem('favs')
             return storedMovies ? JSON.parse(storedMovies) : []
@@ -19,7 +19,7 @@ const FavMoviesContextProvider = ({props}: any) => {
     },[favMovies])
     return (
         <FavMoviesContext.Provider value={{favMovies, setFavMovies}}>
-            {props.children}
+            {children}
         </FavMoviesContext.Provider>
     )
 }

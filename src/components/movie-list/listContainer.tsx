@@ -1,5 +1,7 @@
 import { FC } from "react"
 import { MediaTransport } from "../../transports"
+import MovieCard from "../movie-card"
+import { ListContainer } from "./styles"
 
 interface MovieListContainerProps {
     movies: MediaTransport[]|void
@@ -7,21 +9,21 @@ interface MovieListContainerProps {
 }
 
 const MovieListContainer:FC<MovieListContainerProps> = ({movies, isLoading}) => {
-    const list = movies
     console.log(movies)
 
     return (
-        <div>
+        <ListContainer>
             {isLoading 
             ? <p>Loading</p>
-            : <ul>
-            {!!list && (
-                list.map((movie, index) => {
-                    return <li key={`movie_${index}`}>{movie.Title}</li>
+            : 
+            (!!movies && (
+                movies.map((movie, index) => {
+                    return (
+                        <MovieCard key={`movie_${index}`} movie={movie}/>
+                    )
                 })
-            )}
-            </ul>}
-        </div>
+            ))}
+        </ListContainer>
     )
 }
 

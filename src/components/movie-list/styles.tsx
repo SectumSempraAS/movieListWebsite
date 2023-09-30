@@ -53,3 +53,12 @@ export const PageIndex = styled.div(
         border-bottom: 1px solid black;
     `,
 )
+
+export const ListContainer = styled.div(
+    () => css`
+        display: block
+        > li {
+            list-style-type: none;
+        }
+    `,
+)
