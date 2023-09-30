@@ -1,7 +1,7 @@
 import  {FC} from 'react'
 
 import { MediaTransport } from "../../transports"
-import { Container, Title } from './styles'
+import { Container, ImageContainer, MovieDetailConatiner, Title } from './styles'
 
 interface MovieCardProps {
     movie: MediaTransport
@@ -10,9 +10,14 @@ interface MovieCardProps {
 const MovieCard:FC<MovieCardProps> = ({movie}) => {
     return (
         <Container>
-            <Title>{movie.Title}</Title>
-            <span>{movie.Year}</span>
-            <span>{movie.Type}</span>
+            <ImageContainer>
+                <img src={movie.Poster}/>
+            </ImageContainer>
+            <MovieDetailConatiner>
+                <Title>{movie.Title}</Title>
+                <span>{movie.Year}</span>
+                <span>{movie.Type}</span>
+            </MovieDetailConatiner> 
         </Container>
     )
 }

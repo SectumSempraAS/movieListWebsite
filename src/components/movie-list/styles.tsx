@@ -56,9 +56,12 @@ export const PageIndex = styled.div(
 
 export const ListContainer = styled.div(
     () => css`
-        display: block
-        > li {
-            list-style-type: none;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 12px;
+
+        @media only screen and (min-width: 768px) {
+            grid-template-columns: 1fr 1fr 1fr;
         }
     `,
 )
