@@ -1,10 +1,10 @@
-import {FC, useEffect, useMemo, useState} from 'react';
+import {FC, useState} from 'react';
 
-import { BaseTransport, MediaTransport } from '../../transports';
+import { MediaTransport } from '../../transports';
 // import { useGetTopMoviesList } from './hooks';
 import { Container } from './styles';
 import topMovieIdsList from "../../idList.json"
-import { getMovieDetail } from '../../client';
+import { useGetTopMoviesList } from './hooks';
 
 const sampleMovie = {
     "Title": "Guardians of the Galaxy Vol. 2",
@@ -69,35 +69,6 @@ const Mycard = ({movies}: {movies: MediaTransport[]|void}) => {
         </div>
     )
 }
-
-const getPromiseArray = (topTenMoviesIdList: string[]) => {
-    const promiseArray: Promise<BaseTransport<MediaTransport>>[] = [];
-    topTenMoviesIdList.forEach((topMovieId) => {
-        promiseArray.push(getMovieDetail(topMovieId))
-    })
-    return promiseArray
-}
-
-const useGetTopMoviesList = (topTenMoviesIdList: string[]) => {
-    const [result, setResult] = useState<MediaTransport[]>([]);
-    const promiseArray = useMemo(() => getPromiseArray(topTenMoviesIdList), [topTenMoviesIdList])
-
-    useEffect(() => {
-        if(result.length === 0) {
-            Promise.all(promiseArray)
-            .then((response) => {
-                response.forEach((res) => {
-                    setResult(current => [...current, res.data])
-                })
-            })
-        }
-    },[promiseArray, result.length, topTenMoviesIdList])
-
-    return {
-        result
-    }
-}
-
 
 const MovieListPage:FC<MovieListPageProps> = () => {
     // const {topMovies} = useGetTopMoviesList();

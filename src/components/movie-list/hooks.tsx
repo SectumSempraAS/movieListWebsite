@@ -1,28 +1,33 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
-import { MediaTransport } from "../../transports";
+import { BaseTransport, MediaTransport } from "../../transports";
 import topMovieIdsList from "../../idList.json"
 import { getMovieDetail } from "../../client";
 
-export const useGetTopMoviesList = () => {
-    const [topMovies, setTopMovies] = useState<MediaTransport[]>([]);
-    const topTenMoviesIdList = topMovieIdsList.slice(0,10)
-    
-    useEffect(() => {
-        console.log("This idiot runs again")
-        topTenMoviesIdList.map((topMovieId) => {
-            getMovieDetail(topMovieId)
-            .then((response) => {
-                setTopMovies((movies) => {
-                    // movies.push(response.data);
-                    return [...movies, response.data];
-                }) 
-            })
-        })
-    },[])
+const getPromiseArray = (topTenMoviesIdList: string[]) => {
+    const promiseArray: Promise<BaseTransport<MediaTransport>>[] = [];
+    topTenMoviesIdList.forEach((topMovieId) => {
+        promiseArray.push(getMovieDetail(topMovieId))
+    })
+    return promiseArray
+}
 
+export const useGetTopMoviesList = (topTenMoviesIdList: string[]) => {
+    const [result, setResult] = useState<MediaTransport[]>([]);
+    const promiseArray = useMemo(() => getPromiseArray(topTenMoviesIdList), [topTenMoviesIdList])
+
+    useEffect(() => {
+        if(result.length === 0) {
+            Promise.all(promiseArray)
+            .then((response) => {
+                response.forEach((res) => {
+                    setResult(current => [...current, res.data])
+                })
+            })
+        }
+    },[promiseArray, result.length, topTenMoviesIdList])
 
     return {
-        topMovies
+        result
     }
 }
