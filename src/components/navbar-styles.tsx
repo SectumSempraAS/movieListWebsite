@@ -23,7 +23,8 @@ export const SearchInput = styled.input(
 )
 
 export const SearchButton = styled.button`
-    background-color: #e3e2de;
+    background-color: #fabd07;
+    color: black;
     border-radius: 0 0.25rem 0.25rem 0;
     border: 1px solid black;
     padding: 0.5rem;

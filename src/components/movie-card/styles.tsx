@@ -7,10 +7,12 @@ export const Container = styled.div(
         position: relative;
         flex-direction: column;
         border-radius: 0.25rem;
-        border: 1px solid black;
-        color: black;
+        border: 1px solid #0000011;
+        color: white;
         margin: 0.875rem 0;
         width: fit-content;
+        background-color: #1d2024;
+        padding: 0.5rem 0.3rem;
     `,
 )
 
@@ -68,12 +70,18 @@ interface LikedProps {
 
 export const FavButton = styled.button(
     () => css`
-        background-color: 'white'; 
-        color: 'white;
-        border-radius: 0.25rem;
+        background-color: #000000aa;
+        border: 2px solid black;
+        color: white;
         position: absolute;
-        right: 0.25rem;
-        font-size: 10px;
-        padding: 0.25rem;
+        right: 0;
+        top: 0;
+        font-size: 16px;
+        font-weight: 700;
+        padding: 0.5rem;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 24px;
+        }
     `,
 )

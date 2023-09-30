@@ -11,7 +11,7 @@ interface MovieCardProps {
 
 const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
     const {favMoviesIdList, setFavMoviesIdList} = useContext(FavMoviesContext)
-    const _likedButtontext = useMemo(() => isLiked ? 'LIKED' : 'Select' , [isLiked]) 
+    const _likedButtontext = useMemo(() => isLiked ? '✓' : '+' , [isLiked]) 
 
     const toggleFavourite = () => {
         if(isLiked) {

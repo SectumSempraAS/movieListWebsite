@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 
-import { RatingContainer } from "./styles"
+import { Container, DetailRow, OuterContainer, Poster, PosterContainer, Rating, Title } from "./styles"
 import { useParams } from "react-router-dom"
 import { getMovieDetail } from "../../client"
 import { MediaTransport } from "../../transports"
@@ -62,9 +62,30 @@ const MovieDetailPage = () => {
   console.log(movieData)
 
   return (
-      <>
-          Movie detail page
-      </>
+    <OuterContainer>
+      <Container>
+        <Title>{movieData?.Title}</Title>
+        <div>
+          <Rating>⭐ IMDB Rating:{movieData?.imdbRating}</Rating>
+          {movieData?.Ratings.map((rating, index) => {
+            return (
+              <Rating>⭐ {rating.Source}: {rating.Value}</Rating>
+            )
+          })}
+        </div>
+        <PosterContainer>
+          <Poster src={movieData?.Poster}/>
+        </PosterContainer>
+        <DetailRow>
+          <span>Language: {movieData?.Language}</span>
+          <span>Genre: {movieData?.Genre}</span>
+        </DetailRow>
+        <DetailRow>
+          <span>Runtime: {movieData?.Runtime}</span>
+          <span>Country: {movieData?.Country}</span>
+        </DetailRow>
+      </Container>
+    </OuterContainer>
   )
 }
 

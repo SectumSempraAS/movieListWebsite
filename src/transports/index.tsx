@@ -7,8 +7,8 @@ export interface BaseTransport<T> {
 }
 
 export interface Rating {
-    source: string
-    value: string
+    Source: string
+    Value: string
 }
 
 export interface MediaTransport {
