@@ -69,6 +69,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     const [searchQuery, setSearchQuery] = useState<string>("")
     const [pageNumber, setPageNumber] = useState<number>(0)
     const [resultSize, setResultSize] = useState<number>(0)
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const lastPageNumber = 
     useMemo(() => { return Math.ceil(resultSize/PAGE_SIZE) }, [resultSize])
 
@@ -85,6 +86,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
 
     useEffect(() => {
         if(searchQuery) {
+            setIsLoading(true);
             getMoviesSearchResult({searchString: searchQuery, pageIndex: pageNumber})
                 .then((res) => {
                     console.log(res.data)
@@ -92,6 +94,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
                         setResultSize(res.data.totalResults)
                         setPageTitle(`Showing total ${res.data.totalResults} results for ${searchQuery}`)
                         setMovies(res.data.Search)
+                        setIsLoading(false);
                     }
                 })
                 .catch((error) => {
@@ -100,16 +103,17 @@ const MovieListPage:FC<MovieListPageProps> = () => {
         }
     },[searchQuery, pageNumber])
 
-    console.log(searchQuery)
-    console.log('pageNumber', pageNumber)
+    // console.log(searchQuery)
+    // console.log('pageNumber', pageNumber)
+    console.log('isLoading', isLoading)
 
     return (
         <Container>
             <Navbar changeSearchQuery={changeSearchQuery}/>
             <PageTitle>{pageTitle}</PageTitle>
             {movies?.length ? (
-                <MovieListContainer movies={movies}/>
-            ) : <MovieListContainer movies={result}/> }
+                <MovieListContainer movies={movies} isLoading={isLoading}/>
+            ) : <MovieListContainer movies={result} isLoading={false}/> }
             {movies?.length && <PaginationBar>
                 <PrevPageButton 
                 onClick={decerementPageIndex}
