@@ -1,4 +1,10 @@
-import {FC} from 'react';
+import {FC, useEffect, useMemo, useState} from 'react';
+
+import { BaseTransport, MediaTransport } from '../../transports';
+// import { useGetTopMoviesList } from './hooks';
+import { Container } from './styles';
+import topMovieIdsList from "../../idList.json"
+import { getMovieDetail } from '../../client';
 
 const sampleMovie = {
     "Title": "Guardians of the Galaxy Vol. 2",
@@ -43,33 +49,73 @@ const sampleMovie = {
 
 // Movie List Page should show a list of Movie Name, Type, Year and Image.
 // When a Movie is clicked, it should move to Detail Movie.
-interface media {
-    title: string
-    year: string
-    poster: string
-    type: string
-}
+
 
 interface MovieListPageProps {
-    moviesList: media[]
+    moviesList: MediaTransport[]
 }
 
-const MovieListPage:FC<MovieListPageProps> = ({moviesList}) => {
+const Mycard = ({movies}: {movies: MediaTransport[]|void}) => {
+    const list = movies
     return (
         <div>
-            <h1>
-                Movie List
-            </h1>
-            {!!moviesList && (
-                moviesList.map((movie, index) =>{
-                    return (
-                        <div>
-                            
-                        </div>
-                    )
+            <ul>
+            {!!list && (
+                list.map((movie, index) => {
+                    return <li key={`movie_${index}`}>{movie.Title}</li>
                 })
             )}
+            </ul>
         </div>
+    )
+}
+
+const getPromiseArray = (topTenMoviesIdList: string[]) => {
+    const promiseArray: Promise<BaseTransport<MediaTransport>>[] = [];
+    topTenMoviesIdList.forEach((topMovieId) => {
+        promiseArray.push(getMovieDetail(topMovieId))
+    })
+    return promiseArray
+}
+
+const useGetTopMoviesList = (topTenMoviesIdList: string[]) => {
+    const [result, setResult] = useState<MediaTransport[]>([]);
+    const promiseArray = useMemo(() => getPromiseArray(topTenMoviesIdList), [topTenMoviesIdList])
+
+    useEffect(() => {
+        if(result.length === 0) {
+            Promise.all(promiseArray)
+            .then((response) => {
+                response.forEach((res) => {
+                    setResult(current => [...current, res.data])
+                })
+            })
+        }
+    },[promiseArray, result.length, topTenMoviesIdList])
+
+    return {
+        result
+    }
+}
+
+
+const MovieListPage:FC<MovieListPageProps> = () => {
+    // const {topMovies} = useGetTopMoviesList();
+    const topTenMoviesIdList = topMovieIdsList.slice(0,10)
+    const {result} = useGetTopMoviesList(topTenMoviesIdList) 
+    const [movies, setMovies] = useState<MediaTransport[]>([])
+    const [pageTitle, setPageTitle] = useState<String>("TOP 10 IMDB MOVIES");
+
+    console.log(result);
+
+    return (
+        <Container>
+            <h1>{pageTitle}</h1>
+            {movies?.length ? (
+                <Mycard movies={movies}/>
+            ) : <Mycard movies={result}/> }
+            <p>Hello</p>
+        </Container>
     )
 }
 

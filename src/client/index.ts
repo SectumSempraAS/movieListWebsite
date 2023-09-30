@@ -1,11 +1,36 @@
 import axios from "axios";
+import { BaseTransport, MediaTransport } from "../transports";
 
 const apikey = 'df92fdcc';
 
-export const getMovieDetail = () => {
-    const movieId = 'tt3896198'; 
-    const url = `http://www.omdbapi.com/?i=${movieId}&apikey=${apikey}`
+export const getMovieDetail = (movieId: string):Promise<BaseTransport<MediaTransport>> => {
+    // const url = `http://www.omdbapi.com/?i=${movieId}&apikey=${apikey}`
+    // return axios.get(url);
 
-    axios.get(url)
-    .then((res) => console.log(res));
+    return axios.get('http://www.omdbapi.com/', {
+        params : {
+            i : movieId,
+            apikey: apikey
+        }
+    })
+}
+
+export const getMoviesSearchResult = (
+    {
+        searchString,
+        pageIndex}
+    : {
+        searchString: string,
+        pageIndex?: number
+    }) => {
+    const url = `http://www.omdbapi.com/?s=${searchString}&apikey=${apikey}`
+    axios.get('http://www.omdbapi.com/')
+
+    return axios.get('http://www.omdbapi.com/', {
+        params : {
+            s: searchString,
+            ...(pageIndex ? {page: pageIndex} : {}),
+            apikey: apikey
+        }
+    })
 }
