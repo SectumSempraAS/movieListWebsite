@@ -1,11 +1,20 @@
+import { Routes, Route } from "react-router-dom";
+
 import './App.css';
 import MovieListPage from './components/movie-list';
 
 function App() {
   return (
-    <div className="App">
-      <MovieListPage />
-    </div>
+    <>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <MovieListPage />
+          }
+          />
+      </Routes>
+    </>
   );
 }
 
