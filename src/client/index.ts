@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BaseTransport, MediaTransport } from "../transports";
+import { BaseTransport, MediaTransport, MovieSearchResultTransport } from "../transports";
 
 const apikey = 'df92fdcc';
 
@@ -22,7 +22,7 @@ export const getMoviesSearchResult = (
     : {
         searchString: string,
         pageIndex?: number
-    }) => {
+    }):Promise<BaseTransport<MovieSearchResultTransport>> => {
     const url = `http://www.omdbapi.com/?s=${searchString}&apikey=${apikey}`
     axios.get('http://www.omdbapi.com/')
 

@@ -9,7 +9,14 @@ export interface BaseTransport<T> {
 export interface MediaTransport {
     imdbID: string
     Title: string
-    year: string
-    poster: string
-    type: string
+    Year: string
+    Poster: string
+    Type: string
+}
+
+export interface MovieSearchResultTransport {
+    Search: MediaTransport[]
+    totalResults: number
+    Response: 'True' | 'False'
+    Error?: string
 }

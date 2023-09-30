@@ -1,11 +1,15 @@
-import {FC, useCallback, useState} from 'react';
+import {FC, useCallback, useEffect, useMemo, useState} from 'react';
 
 import { MediaTransport } from '../../transports';
 // import { useGetTopMoviesList } from './hooks';
-import { Container } from './styles';
+import { Container, NextPageButton, PageIndex, PageTitle, PaginationBar, PrevPageButton } from './styles';
 import topMovieIdsList from "../../idList.json"
 import { useGetTopMoviesList } from './hooks';
 import Navbar from '../navbar';
+import { getMoviesSearchResult } from '../../client';
+import MovieListContainer from './listContainer';
+
+const PAGE_SIZE = 10;
 
 const sampleMovie = {
     "Title": "Guardians of the Galaxy Vol. 2",
@@ -56,21 +60,6 @@ interface MovieListPageProps {
     moviesList: MediaTransport[]
 }
 
-const Mycard = ({movies}: {movies: MediaTransport[]|void}) => {
-    const list = movies
-    return (
-        <div>
-            <ul>
-            {!!list && (
-                list.map((movie, index) => {
-                    return <li key={`movie_${index}`}>{movie.Title}</li>
-                })
-            )}
-            </ul>
-        </div>
-    )
-}
-
 const MovieListPage:FC<MovieListPageProps> = () => {
     // const {topMovies} = useGetTopMoviesList();
     const topTenMoviesIdList = topMovieIdsList.slice(0,10)
@@ -78,22 +67,62 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     const [movies, setMovies] = useState<MediaTransport[]>([])
     const [pageTitle, setPageTitle] = useState<string>("TOP 10 IMDB MOVIES");
     const [searchQuery, setSearchQuery] = useState<string>("")
+    const [pageNumber, setPageNumber] = useState<number>(0)
+    const [resultSize, setResultSize] = useState<number>(0)
+    const lastPageNumber = 
+    useMemo(() => { return Math.ceil(resultSize/PAGE_SIZE) }, [resultSize])
 
     const changeSearchQuery = useCallback((newSearchQuery: string) => {
         setSearchQuery(newSearchQuery)
     },[])
 
-    console.log(result)
+    const incrementPageIndex = () => {
+        setPageNumber(index => index+1)
+    }
+    const decerementPageIndex = () => {
+        setPageNumber(index => index-1)
+    }
+
+    useEffect(() => {
+        if(searchQuery) {
+            getMoviesSearchResult({searchString: searchQuery, pageIndex: pageNumber})
+                .then((res) => {
+                    console.log(res.data)
+                    if(res.data.Response === 'True') {
+                        setResultSize(res.data.totalResults)
+                        setPageTitle(`Showing total ${res.data.totalResults} results for ${searchQuery}`)
+                        setMovies(res.data.Search)
+                    }
+                })
+                .catch((error) => {
+                    console.log(error)
+                })
+        }
+    },[searchQuery, pageNumber])
+
     console.log(searchQuery)
+    console.log('pageNumber', pageNumber)
 
     return (
         <Container>
             <Navbar changeSearchQuery={changeSearchQuery}/>
-            <h1>{pageTitle}</h1>
+            <PageTitle>{pageTitle}</PageTitle>
             {movies?.length ? (
-                <Mycard movies={movies}/>
-            ) : <Mycard movies={result}/> }
-            <p>Hello</p>
+                <MovieListContainer movies={movies}/>
+            ) : <MovieListContainer movies={result}/> }
+            {movies?.length && <PaginationBar>
+                <PrevPageButton 
+                onClick={decerementPageIndex}
+                disabled={pageNumber === 0}>
+                    PREV
+                </PrevPageButton>
+                <PageIndex>{pageNumber}</PageIndex>
+                <NextPageButton
+                onClick={incrementPageIndex}
+                disabled={pageNumber === lastPageNumber}>
+                    NEXT
+                </NextPageButton>
+            </PaginationBar>}
         </Container>
     )
 }

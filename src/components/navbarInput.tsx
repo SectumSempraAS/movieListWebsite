@@ -13,20 +13,14 @@ export const NavbarInput:FC<NavbarProps> = ({changeSearchQuery}) => {
         setSearchValue(e.target.value)
     }
 
-    useEffect(() => {
-
-        const delayInputTimeout = setTimeout(() => {
-            changeSearchQuery(searchValue)
-        }, 1000);
-
-        return () => clearTimeout(delayInputTimeout);
-
-    },[searchValue])
+    const onSearch = () => {
+        changeSearchQuery(searchValue)
+    }
 
     return (
         <div>
             <SearchInput type="text" name="inputSearch" value={searchValue} onChange={changeSearchValue} />
-            <SearchButton>Search</SearchButton>
+            <SearchButton onClick={onSearch}>Search</SearchButton>
         </div>
     )
 }
