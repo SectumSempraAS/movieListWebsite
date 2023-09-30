@@ -67,11 +67,11 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     const [movies, setMovies] = useState<MediaTransport[]>([])
     const [pageTitle, setPageTitle] = useState<string>("TOP 10 IMDB MOVIES");
     const [searchQuery, setSearchQuery] = useState<string>("")
-    const [pageNumber, setPageNumber] = useState<number>(0)
+    const [pageNumber, setPageNumber] = useState<number>(1)
     const [resultSize, setResultSize] = useState<number>(0)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const lastPageNumber = 
-    useMemo(() => { return Math.ceil(resultSize/PAGE_SIZE) }, [resultSize])
+    useMemo(() => { return Math.ceil(resultSize/PAGE_SIZE) + 1 }, [resultSize])
 
     const changeSearchQuery = useCallback((newSearchQuery: string) => {
         setSearchQuery(newSearchQuery)
