@@ -6,6 +6,8 @@ export const Container = styled.div(
         display: flex;
         flex-direction: column;
         width: 100%;
+        justify-content: center;
+        align-items: center;
     `,
 )
 
@@ -59,9 +61,14 @@ export const ListContainer = styled.div(
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 20px 12px;
+        padding: 0.5rem 1rem;
+        max-width: 1000px;
 
         @media only screen and (min-width: 768px) {
             grid-template-columns: 1fr 1fr 1fr;
+        }
+        @media only screen and (min-width: 1024px) {
+            grid-template-columns: 1fr 1fr 1fr 1fr;
         }
     `,
 )

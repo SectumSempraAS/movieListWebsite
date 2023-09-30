@@ -21,7 +21,15 @@ export const ImageContainer = styled.div(
         & > img {
             object-fit: cover;
             max-width: 100%;
-            height: 15rem;
+            min-height: 10rem;
+        }
+
+        @media only screen and (min-width: 768px) {
+            & > img {
+                object-fit: cover;
+                max-width: 100%;
+                min-height: 13rem;
+            }
         }
     `,
 )
@@ -31,7 +39,7 @@ export const Title = styled.span(
         font-size: 1rem;
         font-weight: 700;
         width: 100%;
-        line-height: 0.75rem;
+        line-height: 1rem;
     `,
 )
 
