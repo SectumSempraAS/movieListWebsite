@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 
 import './App.css';
 import MovieListPage from './components/movie-list';
+import MovieDetailPage from './components/movie-detail'
 
 function App() {
   return (
@@ -12,7 +13,13 @@ function App() {
           element={
             <MovieListPage />
           }
-          />
+        />
+        <Route
+          path="/movie-detail/:id"
+          element={
+            <MovieDetailPage />
+          }
+        />
       </Routes>
     </>
   );

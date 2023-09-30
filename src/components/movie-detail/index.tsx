@@ -1,7 +1,11 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 
 import { RatingContainer } from "./styles"
+import { useParams } from "react-router-dom"
+import { getMovieDetail } from "../../client"
+import { MediaTransport } from "../../transports"
 
+const DEFAULT_ID = 'tt0111161'
 const sampleMovie = {
     "Title": "Guardians of the Galaxy Vol. 2",
     "Year": "2017",
@@ -44,11 +48,24 @@ const sampleMovie = {
 }
 
 const MovieDetailPage = () => {
-    return (
-        <>
-           Movie detail page
-        </>
-    )
+  const { id } = useParams();
+  const [movieId, setMovieId] = useState<string>(id ?? DEFAULT_ID)
+  const [movieData, setMovideData] = useState<MediaTransport>()
+
+  useEffect(() => {
+    getMovieDetail(movieId)
+    .then((res) => {
+      setMovideData(res.data)
+    })
+  },[movieId])
+
+  console.log(movieData)
+
+  return (
+      <>
+          Movie detail page
+      </>
+  )
 }
 
 export default MovieDetailPage
