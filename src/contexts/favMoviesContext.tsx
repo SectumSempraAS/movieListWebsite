@@ -2,23 +2,23 @@ import { createContext, useEffect, useState } from "react";
 import { MediaTransport } from "../transports";
 
 interface FavMoviesContextTransport {
-    favMovies: MediaTransport[]
-    setFavMovies: React.Dispatch<React.SetStateAction<MediaTransport[]>>
+    favMoviesIdList: string[]
+    setFavMoviesIdList: React.Dispatch<React.SetStateAction<string[]>>
 }
 
 const FavMoviesContext = createContext({} as FavMoviesContextTransport)
 
 const FavMoviesContextProvider = ({children}: any) => {
-    const [favMovies, setFavMovies] = useState(() => {
+    const [favMoviesIdList, setFavMoviesIdList] = useState(() => {
             const storedMovies = localStorage.getItem('favs')
             return storedMovies ? JSON.parse(storedMovies) : []
         })
     
     useEffect(() => {
-        localStorage.setItem('favs', JSON.stringify(favMovies))
-    },[favMovies])
+        localStorage.setItem('favs', JSON.stringify(favMoviesIdList))
+    },[favMoviesIdList])
     return (
-        <FavMoviesContext.Provider value={{favMovies, setFavMovies}}>
+        <FavMoviesContext.Provider value={{favMoviesIdList, setFavMoviesIdList}}>
             {children}
         </FavMoviesContext.Provider>
     )

@@ -1,20 +1,35 @@
-import  {FC} from 'react'
+import  {FC, useContext, useMemo} from 'react'
 
-import { MediaTransport } from "../../transports"
 import { Container, FavButton, ImageContainer, MovieDetailConatiner, Title } from './styles'
-import favicon from "../../../public/fav.svg"
+import { MediaTransport } from '../../transports'
+import { FavMoviesContext } from '../../contexts/favMoviesContext'
 
 interface MovieCardProps {
     movie: MediaTransport
+    isLiked: boolean
 }
 
-const MovieCard:FC<MovieCardProps> = ({movie}) => {
+const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
+    const {favMoviesIdList, setFavMoviesIdList} = useContext(FavMoviesContext)
+    const _likedButtontext = useMemo(() => isLiked ? 'LIKED' : 'Select' , [isLiked]) 
+
+    const toggleFavourite = () => {
+        if(isLiked) {
+            const newFavList:string[] = []
+            favMoviesIdList.forEach((movieId) => {
+                if(movieId !== movie.imdbID)
+                    newFavList.push(movieId)
+            })
+            setFavMoviesIdList(newFavList)
+        } else {
+            setFavMoviesIdList(list => [...list, movie.imdbID])
+        }
+    }
+
     return (
         <Container>
             <ImageContainer>
-                <FavButton>
-                    <img src={favicon} />
-                </FavButton>
+                <FavButton onClick={toggleFavourite}>{_likedButtontext}</FavButton>
                 <img src={movie.Poster} loading='lazy'/>
             </ImageContainer>
             <MovieDetailConatiner>

@@ -4,6 +4,7 @@ import { css } from '@emotion/react'
 export const Container = styled.div(
     () => css`
         display: flex;
+        position: relative;
         flex-direction: column;
         border-radius: 0.25rem;
         border: 1px solid black;
@@ -41,8 +42,30 @@ export const MovieDetailConatiner = styled.div(
     `,
 )
 
-export const FavButton = styled.div(
-    () => css`
+interface LikedProps {
+    isLiked: boolean
+}
 
+// export const FavButton = styled.div<LikedProps>(
+//     ({isLiked}) => css`
+//         background-color: ${isLiked ? '#f50243' : 'white'}; 
+//         color: ${isLiked ? 'white' : 'black'};
+//         border-radius: 0.25rem;
+//         position: absolute;
+//         right: 40px;
+//         font-size: 10px;
+//         padding: 0.25rem;
+//     `,
+// )
+
+export const FavButton = styled.button(
+    () => css`
+        background-color: 'white'; 
+        color: 'white;
+        border-radius: 0.25rem;
+        position: absolute;
+        right: 0.25rem;
+        font-size: 10px;
+        padding: 0.25rem;
     `,
 )
