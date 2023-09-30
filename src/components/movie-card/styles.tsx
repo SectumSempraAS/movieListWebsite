@@ -40,3 +40,9 @@ export const MovieDetailConatiner = styled.div(
         flex-direction: column;
     `,
 )
+
+export const FavButton = styled.div(
+    () => css`
+
+    `,
+)

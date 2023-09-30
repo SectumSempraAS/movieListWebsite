@@ -1,7 +1,8 @@
 import  {FC} from 'react'
 
 import { MediaTransport } from "../../transports"
-import { Container, ImageContainer, MovieDetailConatiner, Title } from './styles'
+import { Container, FavButton, ImageContainer, MovieDetailConatiner, Title } from './styles'
+import favicon from "../../../public/fav.svg"
 
 interface MovieCardProps {
     movie: MediaTransport
@@ -11,7 +12,10 @@ const MovieCard:FC<MovieCardProps> = ({movie}) => {
     return (
         <Container>
             <ImageContainer>
-                <img src={movie.Poster}/>
+                <FavButton>
+                    <img src={favicon} />
+                </FavButton>
+                <img src={movie.Poster} loading='lazy'/>
             </ImageContainer>
             <MovieDetailConatiner>
                 <Title>{movie.Title}</Title>
