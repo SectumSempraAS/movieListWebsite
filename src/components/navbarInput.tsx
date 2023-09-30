@@ -1,7 +1,11 @@
-import React, { useState } from "react"
+import React, { FC, useEffect, useState } from "react"
 import {SearchButton, SearchInput } from "./navbar-styles";
 
-export const NavbarInput = () => {
+interface NavbarProps {
+    changeSearchQuery: CallableFunction
+}
+
+export const NavbarInput:FC<NavbarProps> = ({changeSearchQuery}) => {
     const [searchValue, setSearchValue] = useState<string>('');
 
     const changeSearchValue = (e: any) => {
@@ -9,6 +13,15 @@ export const NavbarInput = () => {
         setSearchValue(e.target.value)
     }
 
+    useEffect(() => {
+
+        const delayInputTimeout = setTimeout(() => {
+            changeSearchQuery(searchValue)
+        }, 1000);
+
+        return () => clearTimeout(delayInputTimeout);
+
+    },[searchValue])
 
     return (
         <div>

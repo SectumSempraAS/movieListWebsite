@@ -1,10 +1,11 @@
-import {FC, useState} from 'react';
+import {FC, useCallback, useState} from 'react';
 
 import { MediaTransport } from '../../transports';
 // import { useGetTopMoviesList } from './hooks';
 import { Container } from './styles';
 import topMovieIdsList from "../../idList.json"
 import { useGetTopMoviesList } from './hooks';
+import Navbar from '../navbar';
 
 const sampleMovie = {
     "Title": "Guardians of the Galaxy Vol. 2",
@@ -75,12 +76,19 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     const topTenMoviesIdList = topMovieIdsList.slice(0,10)
     const {result} = useGetTopMoviesList(topTenMoviesIdList) 
     const [movies, setMovies] = useState<MediaTransport[]>([])
-    const [pageTitle, setPageTitle] = useState<String>("TOP 10 IMDB MOVIES");
+    const [pageTitle, setPageTitle] = useState<string>("TOP 10 IMDB MOVIES");
+    const [searchQuery, setSearchQuery] = useState<string>("")
 
-    console.log(result);
+    const changeSearchQuery = useCallback((newSearchQuery: string) => {
+        setSearchQuery(newSearchQuery)
+    },[])
+
+    console.log(result)
+    console.log(searchQuery)
 
     return (
         <Container>
+            <Navbar changeSearchQuery={changeSearchQuery}/>
             <h1>{pageTitle}</h1>
             {movies?.length ? (
                 <Mycard movies={movies}/>

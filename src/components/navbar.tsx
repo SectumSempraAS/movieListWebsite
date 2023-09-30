@@ -1,13 +1,16 @@
-import React from "react";
+import React, { FC } from "react";
 
 import NavbarInput from "./navbarInput"
 import { Container} from "./navbar-styles";
 
+interface NavbarProps {
+    changeSearchQuery: CallableFunction
+}
 
-const Navbar = () => {
+const Navbar:FC<NavbarProps> = ({changeSearchQuery}) => {
     return (
         <Container>
-            <NavbarInput />
+            <NavbarInput changeSearchQuery={changeSearchQuery}/>
         </Container>
     )
 }
