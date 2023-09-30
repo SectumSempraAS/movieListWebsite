@@ -3,6 +3,7 @@ import  {FC, useContext, useMemo} from 'react'
 import { Container, FavButton, ImageContainer, MovieDetailConatiner, Title } from './styles'
 import { MediaTransport } from '../../transports'
 import { FavMoviesContext } from '../../contexts/favMoviesContext'
+import { useNavigate } from 'react-router-dom'
 
 interface MovieCardProps {
     movie: MediaTransport
@@ -12,8 +13,10 @@ interface MovieCardProps {
 const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
     const {favMoviesIdList, setFavMoviesIdList} = useContext(FavMoviesContext)
     const _likedButtontext = useMemo(() => isLiked ? '✓' : '+' , [isLiked]) 
+    const navigate = useNavigate();
 
-    const toggleFavourite = () => {
+    const toggleFavourite = (e:any) => {
+        e.stopPropagation();
         if(isLiked) {
             const newFavList:string[] = []
             favMoviesIdList.forEach((movieId) => {
@@ -26,10 +29,14 @@ const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
         }
     }
 
+    const navigateToDetailPage = () => {
+        navigate(`movieDetail/${movie.imdbID}`)
+    }
+
     return (
-        <Container>
+        <Container onClick={navigateToDetailPage}>
             <ImageContainer>
-                <FavButton onClick={toggleFavourite}>{_likedButtontext}</FavButton>
+                <FavButton onClick={(e) => toggleFavourite(e)}>{_likedButtontext}</FavButton>
                 <img src={movie.Poster} loading='lazy'/>
             </ImageContainer>
             <MovieDetailConatiner>

@@ -16,13 +16,14 @@ export const Container = styled.div(
         flex-direction: column;
         padding: 0.5rem 1rem;
         font-size: 14px;
-        background-color: #f2f4f7;
+        background-color: black;
+        color: white
     `,
 )
 
 export const Title = styled.h1(
     () => css`
-        color: black;
+        color: white;
         font-style: lato;
     `,
 )
@@ -32,13 +33,15 @@ export const PosterContainer = styled.div(
         display: flex;
         justify-content: center;
         align-items: center;
+        background-color: #1d2024;
+        padding: 1rem;
     `,
 )
 
 export const Poster = styled.img(
     () => css`
-        height: 434px;
-        width: 290px;
+        height: 400px;
+        width: 250px;
         border: 1px solid black;
     `,
 )
