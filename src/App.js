@@ -10,19 +10,19 @@ function App() {
     <>
       <Routes>
         <Route
-          path="/"
+          path="/movies"
           element={
             <MovieListPage />
           }
         />
         <Route
-          path="/movieDetail/:id"
+          path="movies/detail/:id"
           element={
             <MovieDetailPage />
           }
         />
         <Route
-          path="/likedMovies"
+          path="movies/liked"
           element={
             <LikedMovieList />
           }

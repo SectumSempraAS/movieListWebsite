@@ -30,7 +30,7 @@ const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
     }
 
     const navigateToDetailPage = () => {
-        navigate(`movieDetail/${movie.imdbID}`)
+        navigate(`/movies/detail/${movie.imdbID}`)
     }
 
     return (

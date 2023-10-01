@@ -8,6 +8,7 @@ import { useGetTopMoviesList } from './hooks';
 import Navbar from '../navbar';
 import { getMoviesSearchResult } from '../../client';
 import MovieListContainer from './listContainer';
+import { useSearchParams } from 'react-router-dom';
 
 const PAGE_SIZE = 10;
 
@@ -62,11 +63,12 @@ interface MovieListPageProps {
 
 const MovieListPage:FC<MovieListPageProps> = () => {
     // const {topMovies} = useGetTopMoviesList();
+    const [searchParams, setSearchParams] = useSearchParams();
     const topTenMoviesIdList = topMovieIdsList.slice(0,10)
     const {result} = useGetTopMoviesList(topTenMoviesIdList) 
     const [movies, setMovies] = useState<MediaTransport[]>([])
     const [pageTitle, setPageTitle] = useState<string>("TOP 10 IMDB MOVIES");
-    const [searchQuery, setSearchQuery] = useState<string>("")
+    const [searchQuery, setSearchQuery] = useState<string>(searchParams.get('search') ?? '')
     const [pageNumber, setPageNumber] = useState<number>(1)
     const [resultSize, setResultSize] = useState<number>(0)
     const [isLoading, setIsLoading] = useState<boolean>(false)
@@ -75,6 +77,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
 
     const changeSearchQuery = useCallback((newSearchQuery: string) => {
         setSearchQuery(newSearchQuery)
+        setSearchParams({search: newSearchQuery})
     },[])
 
     const incrementPageIndex = () => {
@@ -85,6 +88,8 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     }
 
     useEffect(() => {
+        console.log('searchParams change captured', searchParams.get('search'))
+        console.log('searchQuery', searchQuery)
         if(searchQuery) {
             setIsLoading(true);
             getMoviesSearchResult({searchString: searchQuery, pageIndex: pageNumber})
@@ -101,11 +106,17 @@ const MovieListPage:FC<MovieListPageProps> = () => {
                     console.log(error)
                 })
         }
-    },[searchQuery, pageNumber])
+    },[searchQuery, pageNumber, JSON.stringify(searchParams.get('search'))])
 
-    // console.log(searchQuery)
+    useEffect(() => {
+        if(!!searchParams.get('search') ) {
+            setSearchQuery(searchParams.get('search') ?? '')
+        }
+    },[JSON.stringify(searchParams.get('search'))])
+
+    console.log(searchParams.get('search'))
     // console.log('pageNumber', pageNumber)
-    console.log('isLoading', isLoading)
+    // console.log('isLoading', isLoading)
 
     return (
         <Container>

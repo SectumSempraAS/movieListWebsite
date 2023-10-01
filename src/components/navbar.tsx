@@ -12,12 +12,12 @@ interface NavbarProps {
 }
 
 const Navbar:FC<NavbarProps> = ({changeSearchQuery, showNavBar = true}) => {
-    const navigation = useNavigate();
+    const navigate = useNavigate();
     const homeNavigation = () => {
-        navigation('/')
+        navigate('/movies')
     }
     const favMoviePageNavigation = () => {
-        navigation('/likedMovies')
+        navigate('/movies/liked')
     }
 
     return (
