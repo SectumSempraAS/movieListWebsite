@@ -15,6 +15,7 @@ export const PageTitle = styled.h1(
     () => css`
         display: flex;
         font-size: 1.25rem;
+        padding: 0 0.5rem;
     `,
 )
 
@@ -80,6 +81,23 @@ export const ListContainer = styled.div(
         }
         @media only screen and (min-width: 1024px) {
             grid-template-columns: 1fr 1fr 1fr 1fr;
+        }
+    `,
+)
+
+export const Loader = styled.div(
+    () => css`
+        display: block
+        border: 16px solid #f3f3f3; 
+        border-top: 16px solid #fabd07; 
+        border-radius: 50%;
+        width: 120px;
+        height: 120px;
+        animation: spin 2s linear infinite;
+      
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     `,
 )

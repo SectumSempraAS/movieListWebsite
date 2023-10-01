@@ -2,7 +2,7 @@ import {FC, useCallback, useEffect, useMemo, useState, useRef} from 'react';
 
 import { MediaTransport } from '../../transports';
 // import { useGetTopMoviesList } from './hooks';
-import { Container, NextPageButton, PageIndex, PageTitle, PaginationBar, PrevPageButton } from './styles';
+import { Container, Loader, NextPageButton, PageIndex, PageTitle, PaginationBar, PrevPageButton } from './styles';
 import topMovieIdsList from "../../idList.json"
 import { useGetTopMoviesList } from './hooks';
 import Navbar from '../navbar';
@@ -16,7 +16,7 @@ const PAGE_SIZE = 10;
 
 
 interface MovieListPageProps {
-    moviesList: MediaTransport[]
+    moviesList?: MediaTransport[]
 }
 
 const MovieListPage:FC<MovieListPageProps> = () => {
@@ -52,12 +52,10 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     }
 
     useEffect(() => {
-        console.log('pageNumber', pageNumber )
         if(searchQuery) {
             setIsLoading(true)
             getMoviesSearchResult({searchString: searchQuery, pageIndex: pageNumber})
             .then((res) => {
-                console.log(res.data)
                 if(res.data.Response === 'True') {
                     setResultSize(res.data.totalResults)
                     setPageTitle(`Showing total ${res.data.totalResults} results for ${searchQuery}`)
@@ -73,20 +71,17 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     },[searchQuery, pageNumber])
 
     useEffect(() => {
-        console.log('myRef', myRef.current)
         const observer = new IntersectionObserver((entries) => {
             const entry = entries[0]
             setLastElementVisible(entry.isIntersecting)
             custom(entry.isIntersecting)
-            console.log(entry)
         })
         observer.observe(myRef.current!)
     },[])
 
     // console.log(searchQuery)
     // console.log('pageNumber', pageNumber)
-    // console.log('isLoading', isLoading)
-    console.log('lastElementVisible', lastElementVisible)
+    console.log('isLoading', isLoading)
 
     return (
         <Container>
@@ -96,7 +91,8 @@ const MovieListPage:FC<MovieListPageProps> = () => {
                 <MovieListContainer movies={movies} />
             ) : <MovieListContainer movies={result} /> }
             <div ref={myRef}>Hello</div>
-            {movies?.length && 
+            {isLoading && <Loader />}
+            {/* {movies?.length && 
             <PaginationBar>
                 <PrevPageButton 
                 onClick={decerementPageIndex}
@@ -109,7 +105,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
                 disabled={pageNumber === lastPageNumber}>
                     NEXT
                 </NextPageButton>
-            </PaginationBar>}
+            </PaginationBar>} */}
         </Container>
     )
 }

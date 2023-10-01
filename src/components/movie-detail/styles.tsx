@@ -19,8 +19,8 @@ export const Container = styled.div(
         background-color: black;
         color: white
 
-        @media only screen and (min-width: 1024px) {
-            flex-direction: row !important;
+        @media only screen and (min-width: 768px) {
+            flex-direction: row;
         }
     `,
 )
