@@ -90,7 +90,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
             {movies?.length ? (
                 <MovieListContainer movies={movies} />
             ) : <MovieListContainer movies={result} /> }
-            <div ref={myRef}>Hello</div>
+            <div ref={myRef}>LOADING</div>
             {isLoading && <Loader />}
             {/* {movies?.length && 
             <PaginationBar>

@@ -25,8 +25,8 @@ export const useGetTopMoviesList = (topTenMoviesIdList: string[]) => {
                 })
             })
         }
-    },[promiseArray, result.length, topTenMoviesIdList])
-
+    },[])
+    console.log(result)
     return {
         result
     }
