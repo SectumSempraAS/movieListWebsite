@@ -75,8 +75,8 @@ const MovieListPage:FC<MovieListPageProps> = () => {
             <Navbar changeSearchQuery={changeSearchQuery}/>
             <PageTitle>{pageTitle}</PageTitle>
             {movies?.length ? (
-                <MovieListContainer movies={movies} isLoading={isLoading}/>
-            ) : <MovieListContainer movies={result} isLoading={false}/> }
+                <MovieListContainer movies={movies} />
+            ) : <MovieListContainer movies={result} /> }
             {movies?.length && 
             <PaginationBar>
                 <PrevPageButton 

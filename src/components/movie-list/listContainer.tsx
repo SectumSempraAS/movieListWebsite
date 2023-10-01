@@ -6,24 +6,20 @@ import { FavMoviesContext } from "../../contexts/favMoviesContext"
 
 interface MovieListContainerProps {
     movies: MediaTransport[]|void
-    isLoading: boolean
 }
 
-const MovieListContainer:FC<MovieListContainerProps> = ({movies, isLoading}) => {
+const MovieListContainer:FC<MovieListContainerProps> = ({movies}) => {
     const {favMoviesIdList} = useContext(FavMoviesContext)
 
     return (
         <ListContainer>
-            {isLoading 
-            ? <p>Loading</p>
-            : 
-            (!!movies && (
+            {!!movies && (
                 movies.map((movie, index) => {
                     return (
                         <MovieCard key={`movie_${index}`} movie={movie} isLiked={favMoviesIdList.includes(movie.imdbID)}/>
                     )
                 })
-            ))}
+            )}
         </ListContainer>
     )
 }

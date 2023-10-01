@@ -31,7 +31,7 @@ export const LikedMovieList = () => {
             <Navbar showNavBar={false}/>   
             <PageTitle>YOUR FAVOURITE MOVIES</PageTitle>
             {!!likedMovies && likedMovies.length > 0 
-                ? <MovieListContainer movies={likedMovies} isLoading={false}/>
+                ? <MovieListContainer movies={likedMovies} />
                 : <EmptyMovieList>No Favourite movies as of Now!</EmptyMovieList>
             }
         </Container>
