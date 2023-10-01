@@ -1,4 +1,4 @@
-import {FC, useCallback, useEffect, useMemo, useState} from 'react';
+import {FC, useCallback, useEffect, useMemo, useState, useRef} from 'react';
 
 import { MediaTransport } from '../../transports';
 // import { useGetTopMoviesList } from './hooks';
@@ -29,14 +29,20 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     const [pageNumber, setPageNumber] = useState<number>(1)
     const [resultSize, setResultSize] = useState<number>(0)
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [lastElementVisible, setLastElementVisible] = useState<boolean>(false)
     const lastPageNumber = 
     useMemo(() => { return Math.ceil(resultSize/PAGE_SIZE) + 1 }, [resultSize])
+    const myRef = useRef<HTMLInputElement>(null)
 
     const changeSearchQuery = useCallback((newSearchQuery: string) => {
         setPageNumber(1)
         setMovies([])
         setSearchQuery(newSearchQuery)
     },[])
+
+    const custom = (shouldPaginate: boolean) => {
+        if(shouldPaginate) setPageNumber(prevPageNumber => prevPageNumber + 1)
+    }
 
     const incrementPageIndex = () => {
         setPageNumber(index => index+1)
@@ -66,9 +72,21 @@ const MovieListPage:FC<MovieListPageProps> = () => {
         }
     },[searchQuery, pageNumber])
 
+    useEffect(() => {
+        console.log('myRef', myRef.current)
+        const observer = new IntersectionObserver((entries) => {
+            const entry = entries[0]
+            setLastElementVisible(entry.isIntersecting)
+            custom(entry.isIntersecting)
+            console.log(entry)
+        })
+        observer.observe(myRef.current!)
+    },[])
+
     // console.log(searchQuery)
     // console.log('pageNumber', pageNumber)
     // console.log('isLoading', isLoading)
+    console.log('lastElementVisible', lastElementVisible)
 
     return (
         <Container>
@@ -77,6 +95,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
             {movies?.length ? (
                 <MovieListContainer movies={movies} />
             ) : <MovieListContainer movies={result} /> }
+            <div ref={myRef}>Hello</div>
             {movies?.length && 
             <PaginationBar>
                 <PrevPageButton 
