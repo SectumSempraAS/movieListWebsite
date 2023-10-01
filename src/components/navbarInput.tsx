@@ -19,7 +19,12 @@ export const NavbarInput:FC<NavbarProps> = ({changeSearchQuery}) => {
 
     return (
         <SeachBar>
-            <SearchInput type="text" name="inputSearch" value={searchValue} onChange={changeSearchValue} />
+            <SearchInput 
+                type="text" 
+                name="inputSearch" 
+                value={searchValue} 
+                onChange={changeSearchValue} 
+                placeholder="Search for more"/>
             <SearchButton onClick={onSearch}>Search</SearchButton>
         </SeachBar>
     )

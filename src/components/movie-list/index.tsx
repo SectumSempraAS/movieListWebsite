@@ -114,10 +114,11 @@ const MovieListPage:FC<MovieListPageProps> = () => {
             {movies?.length ? (
                 <MovieListContainer movies={movies} isLoading={isLoading}/>
             ) : <MovieListContainer movies={result} isLoading={false}/> }
-            {movies?.length && <PaginationBar>
+            {movies?.length && 
+            <PaginationBar>
                 <PrevPageButton 
                 onClick={decerementPageIndex}
-                disabled={pageNumber === 0}>
+                disabled={pageNumber === 1}>
                     PREV
                 </PrevPageButton>
                 <PageIndex>{pageNumber}</PageIndex>

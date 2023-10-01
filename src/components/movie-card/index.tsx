@@ -41,8 +41,8 @@ const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
             </ImageContainer>
             <MovieDetailConatiner>
                 <Title>{movie.Title}</Title>
-                <span>{movie.Year}</span>
-                <span>{movie.Type}</span>
+                <span>Year: {movie.Year}</span>
+                <span>Type: {movie.Type}</span>
             </MovieDetailConatiner> 
         </Container>
     )

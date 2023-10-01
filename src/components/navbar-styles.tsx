@@ -7,7 +7,7 @@ export const Container = styled.div(
         background-color: #1d2024;
         width: 100%;
         justify-content: center;
-        padding: 0.75rem
+        padding: 0;
     `,
 )
 
@@ -19,7 +19,7 @@ export const InnerContainer = styled.div(
         align-items: center;
         justify-content: space-between;
         width: 100%;
-        padding: 0 0.5rem;
+        padding: 0.5rem 0.8rem;
 
         @media only screen and (min-width: 768px) {
             padding: 0.5rem 1rem;
@@ -35,6 +35,7 @@ export const NavButton = styled.button`
     color: black;
     border: 1px solid black;
     padding: 0.2rem;
+    cursor: pointer;
 
     & > img {
         height: 1rem;

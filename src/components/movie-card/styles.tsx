@@ -36,9 +36,9 @@ export const ImageContainer = styled.div(
     `,
 )
 
-export const Title = styled.span(
+export const Title = styled.div(
     () => css`
-        font-size: 1rem;
+        font-size: 14px;
         font-weight: 700;
         width: 100%;
         line-height: 1rem;
@@ -49,24 +49,15 @@ export const MovieDetailConatiner = styled.div(
     () => css`
         display: flex;
         flex-direction: column;
+        justify-content: end;
+        font-size: 14px;
+        padding: 0.3rem 0.5rem;
+
+        & > span {
+            color: #a2a3a2;
+        }
     `,
 )
-
-interface LikedProps {
-    isLiked: boolean
-}
-
-// export const FavButton = styled.div<LikedProps>(
-//     ({isLiked}) => css`
-//         background-color: ${isLiked ? '#f50243' : 'white'}; 
-//         color: ${isLiked ? 'white' : 'black'};
-//         border-radius: 0.25rem;
-//         position: absolute;
-//         right: 40px;
-//         font-size: 10px;
-//         padding: 0.25rem;
-//     `,
-// )
 
 export const FavButton = styled.button(
     () => css`

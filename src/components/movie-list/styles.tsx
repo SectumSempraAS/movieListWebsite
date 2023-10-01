@@ -24,16 +24,26 @@ export const PaginationBar = styled.div(
         font-size: 1rem;
         line-height: 0.2rem;
         justify-content: center;
+        font-weight: 700;
+        margin: 1rem;
     `,
 )
 
 export const PageButton = styled.button(
     () => css`
-        padding: 0.1rem 1.5rem;
-        border-radius: 0.375rem;
-        background-color: #e3e2de;
-        border: 1px solid black;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: #fabd07;
         color: black;
+        border: 1px solid black;
+        padding: 0.2rem 0.5rem;
+        font-weight: 700;
+        cursor: pointer;
+
+        @media only screen and (min-width: 768px) {
+            padding: 0.5rem 1rem;
+        }
     `,
 )
 
@@ -44,7 +54,7 @@ export const PrevPageButton = styled(PageButton)(
 )
 export const NextPageButton = styled(PageButton)(
     () => css`
-    border-radius: 0 0.375rem 0.375rem 0;
+        border-radius: 0 0.375rem 0.375rem 0;
     `,
 )
 

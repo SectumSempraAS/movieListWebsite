@@ -6,6 +6,7 @@ import { getMovieDetail } from "../../client"
 import { MediaTransport } from "../../transports"
 import { FavMoviesContext } from "../../contexts/favMoviesContext"
 import { FavButton } from "../movie-card/styles"
+import Navbar from "../navbar"
 
 const DEFAULT_ID = 'tt0111161'
 const sampleMovie = {
@@ -102,6 +103,7 @@ const MovieDetailPage = () => {
 
   return (
     <OuterContainer>
+      <Navbar showNavBar={false}/>
       <Container>
         <TopContainer>
           <Title>{movieData?.Title}</Title>
