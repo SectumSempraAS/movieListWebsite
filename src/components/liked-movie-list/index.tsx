@@ -3,6 +3,8 @@ import { FavMoviesContext } from "../../contexts/favMoviesContext"
 import { getMovieDetail } from "../../client"
 import { BaseTransport, MediaTransport } from "../../transports"
 import MovieListContainer from "../movie-list/listContainer"
+import { Container, EmptyMovieList, PageTitle } from "./styles"
+import Navbar from "../navbar"
 
 export const LikedMovieList = () => {
     const {favMoviesIdList} = useContext(FavMoviesContext)
@@ -25,12 +27,14 @@ export const LikedMovieList = () => {
     },[favMoviesIdList])
 
     return (
-        <>
-        {!!likedMovies 
-            ? <MovieListContainer movies={likedMovies} isLoading={false}/>
-            : null
-        }
-        </>
+        <Container>
+            <Navbar showNavBar={false}/>   
+            <PageTitle>YOUR FAVOURITE MOVIES</PageTitle>
+            {!!likedMovies && likedMovies.length > 0 
+                ? <MovieListContainer movies={likedMovies} isLoading={false}/>
+                : <EmptyMovieList>No Favourite movies as of Now!</EmptyMovieList>
+            }
+        </Container>
     )
 }
 

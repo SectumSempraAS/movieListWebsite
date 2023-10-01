@@ -1,5 +1,5 @@
 import React, { FC, useEffect, useState } from "react"
-import {SearchButton, SearchInput } from "./navbar-styles";
+import {SeachBar, SearchButton, SearchInput } from "./navbar-styles";
 
 interface NavbarProps {
     changeSearchQuery: CallableFunction
@@ -18,10 +18,10 @@ export const NavbarInput:FC<NavbarProps> = ({changeSearchQuery}) => {
     }
 
     return (
-        <div>
+        <SeachBar>
             <SearchInput type="text" name="inputSearch" value={searchValue} onChange={changeSearchValue} />
             <SearchButton onClick={onSearch}>Search</SearchButton>
-        </div>
+        </SeachBar>
     )
 }
 

@@ -1,16 +1,38 @@
 import React, { FC } from "react";
 
 import NavbarInput from "./navbarInput"
-import { Container} from "./navbar-styles";
+import { Container, FavMoviePageNavigation, HomeNavigation, InnerContainer, NavText} from "./navbar-styles";
+import HomeIcon from '../resource/home.png'
+import HeartIcon from '../resource/blackheart.png'
+import { useNavigate } from "react-router-dom";
 
 interface NavbarProps {
-    changeSearchQuery: CallableFunction
+    changeSearchQuery?: CallableFunction
+    showNavBar?: boolean
 }
 
-const Navbar:FC<NavbarProps> = ({changeSearchQuery}) => {
+const Navbar:FC<NavbarProps> = ({changeSearchQuery, showNavBar = true}) => {
+    const navigation = useNavigate();
+    const homeNavigation = () => {
+        navigation('/')
+    }
+    const favMoviePageNavigation = () => {
+        navigation('/likedMovies')
+    }
+
     return (
         <Container>
-            <NavbarInput changeSearchQuery={changeSearchQuery}/>
+            <InnerContainer>
+                <HomeNavigation onClick={homeNavigation}>
+                    <img src={HomeIcon}/>
+                    <NavText>HOME</NavText>
+                </HomeNavigation>
+                {showNavBar && changeSearchQuery ? <NavbarInput changeSearchQuery={changeSearchQuery}/> : null}
+                <FavMoviePageNavigation onClick={favMoviePageNavigation}>
+                    <img src={HeartIcon} />
+                    <NavText>LIKED MOVIES</NavText>
+                </FavMoviePageNavigation>
+            </InnerContainer>
         </Container>
     )
 }
