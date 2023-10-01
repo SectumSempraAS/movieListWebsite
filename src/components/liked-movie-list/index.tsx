@@ -24,7 +24,7 @@ export const LikedMovieList = () => {
             ])
         })
         .catch((error) => console.log(error))
-    },[favMoviesIdList])
+    },[])
 
     return (
         <Container>

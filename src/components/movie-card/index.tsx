@@ -1,4 +1,4 @@
-import  {FC, useContext, useMemo} from 'react'
+import  {FC, memo, useContext, useMemo} from 'react'
 
 import { Container, FavButton, ImageContainer, MovieDetailConatiner, Title } from './styles'
 import { MediaTransport } from '../../transports'
@@ -48,4 +48,4 @@ const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
     )
 }
 
-export default MovieCard
+export default memo(MovieCard)

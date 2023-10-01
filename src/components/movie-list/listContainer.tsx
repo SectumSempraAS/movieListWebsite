@@ -1,4 +1,4 @@
-import { FC, useContext, useState } from "react"
+import { FC, memo, useContext } from "react"
 import { MediaTransport } from "../../transports"
 import MovieCard from "../movie-card"
 import { ListContainer } from "./styles"
@@ -28,4 +28,4 @@ const MovieListContainer:FC<MovieListContainerProps> = ({movies, isLoading}) => 
     )
 }
 
-export default MovieListContainer
+export default memo(MovieListContainer)

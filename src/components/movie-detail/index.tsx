@@ -56,7 +56,7 @@ const RatingContainer = ({movieData}:{movieData: MediaTransport}) => {
         <Rating>⭐ IMDB Rating:{movieData?.imdbRating}</Rating>
         {movieData.Ratings.map((rating, index) => {
           return (
-            <Rating>⭐ {rating.Source}: {rating.Value}</Rating>
+            <Rating key={`rating_${index}`}>⭐ {rating.Source}: {rating.Value}</Rating>
           )
         })}
       </>
