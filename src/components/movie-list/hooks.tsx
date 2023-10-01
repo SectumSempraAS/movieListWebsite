@@ -1,7 +1,6 @@
 import { useEffect, useMemo, useState } from "react"
 
 import { BaseTransport, MediaTransport } from "../../transports";
-import topMovieIdsList from "../../idList.json"
 import { getMovieDetail } from "../../client";
 
 const getPromiseArray = (topTenMoviesIdList: string[]) => {

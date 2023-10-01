@@ -19,19 +19,22 @@ export const Container = styled.div(
 export const ImageContainer = styled.div(
     () => css`
         display: block;
-
+        height: 180px;
+        width: 125px;
         & > img {
             object-fit: cover;
-            max-width: 100%;
-            min-height: 10rem;
+            height: 100%;
+            width: 100%;
         }
 
         @media only screen and (min-width: 768px) {
-            & > img {
-                object-fit: cover;
-                max-width: 100%;
-                min-height: 13rem;
-            }
+            height: 330px;
+            width: 210px;
+        }
+
+        @media only screen and (min-width: 768px) {
+            height: 330px;
+            width: 230px;
         }
     `,
 )
@@ -73,6 +76,43 @@ export const FavButton = styled.button(
 
         @media only screen and (min-width: 768px) {
             font-size: 24px;
+        }
+    `,
+)
+
+interface SkeletonProps {
+    width: string
+    height: string
+    borderRadius: string
+}
+
+export const Skeleton = styled.div<SkeletonProps>(
+    ({height, width, borderRadius}) => css`
+        background-color: #919191;
+        width: ${width || "100%"};
+        height: ${height || "40px"};
+        border-radius: ${borderRadius || "4px"};
+        animation: pulse 1.5s infinite linear;
+
+        @keyframes leftToRightAnimation {
+            from {
+                transform: translateX(-200px);
+            }
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+            }
+            50% {
+                opacity: 0.4;
+            }
+            100% {
+                opacity: 0.6;
+            }
         }
     `,
 )

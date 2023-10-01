@@ -1,9 +1,10 @@
-import  {FC, memo, useContext, useMemo} from 'react'
+import  {FC, memo, useContext, useEffect, useMemo, useState} from 'react'
 
 import { Container, FavButton, ImageContainer, MovieDetailConatiner, Title } from './styles'
 import { MediaTransport } from '../../transports'
 import { FavMoviesContext } from '../../contexts/favMoviesContext'
 import { useNavigate } from 'react-router-dom'
+import SkeletonMovieCard from './skeleton'
 
 interface MovieCardProps {
     movie: MediaTransport
@@ -11,6 +12,7 @@ interface MovieCardProps {
 }
 
 const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
+    const [isLoading, setIsLoading] = useState<boolean>(true)
     const {favMoviesIdList, setFavMoviesIdList} = useContext(FavMoviesContext)
     const _likedButtontext = useMemo(() => isLiked ? '✓' : '+' , [isLiked]) 
     const navigate = useNavigate();
@@ -33,18 +35,27 @@ const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
         navigate(`movieDetail/${movie.imdbID}`)
     }
 
+    useEffect(() => {
+        setTimeout(() => setIsLoading(false),500)
+    },[])
+
     return (
-        <Container onClick={navigateToDetailPage}>
-            <ImageContainer>
-                <FavButton onClick={(e) => toggleFavourite(e)}>{_likedButtontext}</FavButton>
-                <img src={movie.Poster} loading='lazy'/>
-            </ImageContainer>
-            <MovieDetailConatiner>
-                <Title>{movie.Title}</Title>
-                <span>Year: {movie.Year}</span>
-                <span>Type: {movie.Type}</span>
-            </MovieDetailConatiner> 
-        </Container>
+        <>
+            {isLoading ? <SkeletonMovieCard />
+             : (
+                <Container onClick={navigateToDetailPage}>
+                    <ImageContainer>
+                        <FavButton onClick={(e) => toggleFavourite(e)}>{_likedButtontext}</FavButton>
+                        <img src={movie.Poster} loading='lazy' alt={movie.Title}/>
+                    </ImageContainer>
+                    <MovieDetailConatiner>
+                        <Title>{movie.Title}</Title>
+                        <span>Year: {movie.Year}</span>
+                        <span>Type: {movie.Type}</span>
+                    </MovieDetailConatiner> 
+                </Container>
+             )}
+        </>
     )
 }
 

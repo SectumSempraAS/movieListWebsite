@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import { FC } from "react";
 
 import NavbarInput from "./navbarInput"
 import { Container, FavMoviePageNavigation, HomeNavigation, InnerContainer, NavText} from "./navbar-styles";
@@ -24,12 +24,12 @@ const Navbar:FC<NavbarProps> = ({changeSearchQuery, showNavBar = true}) => {
         <Container>
             <InnerContainer>
                 <HomeNavigation onClick={homeNavigation}>
-                    <img src={HomeIcon}/>
+                    <img src={HomeIcon} alt="homeIcon"/>
                     <NavText>HOME</NavText>
                 </HomeNavigation>
                 {showNavBar && changeSearchQuery ? <NavbarInput changeSearchQuery={changeSearchQuery}/> : null}
                 <FavMoviePageNavigation onClick={favMoviePageNavigation}>
-                    <img src={HeartIcon} />
+                    <img src={HeartIcon} alt="heartIcon"/>
                     <NavText>LIKED MOVIES</NavText>
                 </FavMoviePageNavigation>
             </InnerContainer>
