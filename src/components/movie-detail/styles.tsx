@@ -13,17 +13,18 @@ export const OuterContainer = styled.div(
 export const Container = styled.div(
     () => css`
         display: flex;
-        flex-direction: column;
-        padding: 0.5rem 1rem;
         font-size: 14px;
         background-color: black;
-        color: white
-        width: 100%
-
+        color: white;
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        
         @media only screen and (min-width: 768px) {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px 12px;
+            flex-direction: row;
+            align-items: end;
+            justify-content: center;
         }
     `,
 )
@@ -33,6 +34,11 @@ export const TopContainer = styled.div(
         display: flex;
         flex-direction: column;
         color: white;
+        max-width: 800px;
+
+        @media only screen and (min-width: 768px) {
+            padding: 1rem;
+        }
 
         @media only screen and (min-width: 1024px) {
             justify-content: end;
@@ -41,10 +47,20 @@ export const TopContainer = styled.div(
     `,
 ) 
 
-export const BottomContainer = styled(TopContainer)(
+export const BottomContainer = styled.div(
     () => css`
+        display: flex;
+        flex-direction: column;
+        color: white;
+        max-width: 800px;
+        padding: 1rem;
+
+        @media only screen and (min-width: 768px) {
+            padding: 1rem;
+        }
+
         @media only screen and (min-width: 1024px) {
-            justify-content: end;
+            justify-content: flex-end;
             padding: 1.5rem;
         }
     `,
@@ -66,7 +82,7 @@ export const PosterContainer = styled.div(
         padding: 1rem;
 
         @media only screen and (min-width: 768px) {
-            justify-content: start;
+            justify-content: center;
         }
     `,
 )
@@ -81,7 +97,7 @@ export const PosterInnerContainer = styled.div(
 export const Poster = styled.img(
     () => css`
         height: 370px;
-        width: 250px;
+        width: 200px;
         border: 1px solid black;
     `,
 )
@@ -99,7 +115,13 @@ export const DetailRow = styled.div(
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin: 0.25rem 0;
+        font-size: 14px;
+        line-height: 1rem;
+        margin: 0.3rem 0;
+
+        @media only screen and (min-width: 768px) {
+            margin: 0.4rem 0;;
+        }
     `,
 )
 

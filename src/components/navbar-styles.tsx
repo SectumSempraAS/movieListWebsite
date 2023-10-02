@@ -15,7 +15,7 @@ export const InnerContainer = styled.div(
     () => css`
         display: flex;
         flex-direction: row;
-        max-width: 1024px;
+        max-width: 600px;
         align-items: center;
         justify-content: space-between;
         width: 100%;
@@ -23,6 +23,7 @@ export const InnerContainer = styled.div(
 
         @media only screen and (min-width: 768px) {
             padding: 0.5rem 1rem;
+            max-width: 1024px;
         }
     `,
 )

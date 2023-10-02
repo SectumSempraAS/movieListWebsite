@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 
 import { BottomContainer, Container, DetailRow, OuterContainer, Plot, PlotTitle, Poster, PosterContainer, PosterInnerContainer, Rating, Title, TopContainer } from "./styles"
 import { useParams } from "react-router-dom"
@@ -7,6 +7,7 @@ import { MediaTransport } from "../../transports"
 import { FavMoviesContext } from "../../contexts/favMoviesContext"
 import { FavButton } from "../movie-card/styles"
 import Navbar from "../navbar"
+import { InnerContainer } from "../navbar-styles"
 
 const DEFAULT_ID = 'tt0111161'
 
@@ -65,34 +66,34 @@ const MovieDetailPage = () => {
     <OuterContainer>
       <Navbar showNavBar={false}/>
       <Container>
-        <TopContainer>
-          <Title>{movieData?.Title}</Title>
-          {RatingContainer}
-          <PosterContainer>
-            <PosterInnerContainer>
-              <FavButton onClick={(e) => toggleFavourite(e)}>{isLiked ? '✓' : '+'}</FavButton>
-              <Poster src={movieData?.Poster}/>
-            </PosterInnerContainer>
-          </PosterContainer>
-        </TopContainer>
-        <BottomContainer>
+          <TopContainer>
+            <Title>{movieData?.Title}</Title>
+            {RatingContainer}
+            <PosterContainer>
+              <PosterInnerContainer>
+                <FavButton onClick={(e) => toggleFavourite(e)}>{isLiked ? '✓' : '+'}</FavButton>
+                <Poster src={movieData?.Poster}/>
+              </PosterInnerContainer>
+            </PosterContainer>
+          </TopContainer>
+          <BottomContainer>
           <DetailRow>
-            <span>Language: {movieData?.Language}</span>
-          </DetailRow>
-          <DetailRow><span>Genre: {movieData?.Genre}</span></DetailRow>
-          <DetailRow>
-            <span>Runtime: {movieData?.Runtime}</span>
-            <span>Country: {movieData?.Country}</span>
-          </DetailRow>
-          <DetailRow>Director: {movieData?.Director}</DetailRow>
-          <DetailRow>Actors: {movieData?.Actors}</DetailRow>
-          <DetailRow>Writer: {movieData?.Writer}</DetailRow>
-          <PlotTitle>PLOT</PlotTitle>
-          <Plot>{movieData?.Plot}</Plot>
-          <PlotTitle>ACHEIVEMENTS</PlotTitle>
-          <DetailRow>Box Office Collection: {movieData?.BoxOffice}</DetailRow>
-          <DetailRow>Awards: {movieData?.Awards}</DetailRow>
-        </BottomContainer>
+              <span>► Language: {movieData?.Language}</span>
+            </DetailRow>
+            <DetailRow><span>► Genre: {movieData?.Genre}</span></DetailRow>
+            <DetailRow>
+              <span>► Runtime: {movieData?.Runtime}</span>
+              <span>► Country: {movieData?.Country}</span>
+            </DetailRow>
+            <DetailRow>► Director: {movieData?.Director}</DetailRow>
+            <DetailRow>► Actors: {movieData?.Actors}</DetailRow>
+            <DetailRow>► Writer: {movieData?.Writer}</DetailRow>
+            <PlotTitle>PLOT</PlotTitle>
+            <Plot>{movieData?.Plot}</Plot>
+            <PlotTitle>ACHEIVEMENTS</PlotTitle>
+            <DetailRow>Box Office Collection: {movieData?.BoxOffice}</DetailRow>
+            <DetailRow>Awards: {movieData?.Awards}</DetailRow>
+          </BottomContainer>
       </Container>
     </OuterContainer>
   )

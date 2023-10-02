@@ -9,7 +9,7 @@ const SkeletonListContainer = () => {
             {!!_skeletonArray && (
                 _skeletonArray.map((movie, index) => {
                     return (
-                        <Skeleton />
+                        <Skeleton key={`skeleton_${index}`} />
                     )
                 })
             )}

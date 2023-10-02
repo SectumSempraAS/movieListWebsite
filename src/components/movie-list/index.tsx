@@ -32,18 +32,25 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [lastElementVisible, setLastElementVisible] = useState<boolean>(false)
     const [isResultLoading, setIsResultLoading] = useState<boolean>(true)
-    const lastPageNumber = 
-    useMemo(() => { return Math.ceil(resultSize/PAGE_SIZE) + 1 }, [resultSize])
+    const [lastPageNumber, setLastPageNumber] = useState<number>(Math.ceil(resultSize/PAGE_SIZE) + 1)
+    
     const myRef = useRef<HTMLInputElement>(null)
 
     const changeSearchQuery = useCallback((newSearchQuery: string) => {
-        setPageNumber(1)
-        setMovies([])
-        setSearchQuery(newSearchQuery)
-    },[])
+        if(newSearchQuery !== searchQuery) {
+            setPageNumber(1)
+            setIsResultLoading(true)
+            if(newSearchQuery !== searchQuery)setMovies([])
+            setSearchQuery(newSearchQuery)
+            setTimeout(() => setIsResultLoading(false),300)
+        }
+    },[searchQuery])
 
     const custom = (shouldPaginate: boolean) => {
-        if(shouldPaginate) setPageNumber(prevPageNumber => prevPageNumber + 1)
+        console.log('pageNumber', pageNumber)
+        console.log('lastPageNumber', lastPageNumber)
+        console.log('resultSize', resultSize)
+        if(shouldPaginate && pageNumber <= lastPageNumber) setPageNumber(prevPageNumber => prevPageNumber + 1)
     }
 
     const incrementPageIndex = () => {
@@ -54,40 +61,52 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     }
 
     useEffect(() => {
-        if(searchQuery) {
+        console.log(pageNumber)
+        if(searchQuery && pageNumber <= lastPageNumber) {
             setIsLoading(true)
             getMoviesSearchResult({searchString: searchQuery, pageIndex: pageNumber})
             .then((res) => {
                 if(res.data.Response === 'True') {
                     setResultSize(res.data.totalResults)
+                    setLastPageNumber(Math.ceil(res.data.totalResults/PAGE_SIZE))
                     setPageTitle(`Showing total ${res.data.totalResults} results for ${searchQuery}`)
                     if(pageNumber === 1) setMovies(res.data.Search)
                     else setMovies(prevMovies => [...prevMovies, ...res.data.Search,])
                     setIsLoading(false);
+                } else {
+                    setPageTitle('!!Could not find results for this search!!')
                 }
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.log(error)
             })
         }
-    },[searchQuery, pageNumber])
+    },[searchQuery, pageNumber, lastPageNumber])
 
     useEffect(() => {
         const observer = new IntersectionObserver((entries) => {
             const entry = entries[0]
             setLastElementVisible(entry.isIntersecting)
-            custom(entry.isIntersecting)
+            if(pageNumber !== lastPageNumber)custom(entry.isIntersecting)
         })
         observer.observe(myRef.current!)
-    },[])
+
+        return () => {
+            if (myRef.current) {
+              observer.unobserve(myRef.current);
+            }
+          }
+    },[lastPageNumber])
 
     useEffect(() => {
         setTimeout(() => setIsResultLoading(false),300)
     },[])
 
     // console.log(searchQuery)
-    // console.log('pageNumber', pageNumber)
-    console.log('isLoading', isLoading)
+    console.log('pageNumber', pageNumber)
+    console.log('LASTpageNumber', lastPageNumber)
+    // console.log('isLoading', isLoading)
 
     return (
         <Container>
