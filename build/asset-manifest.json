@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/static/css/main.1ef3a49a.css",
+    "main.js": "/static/js/main.f51265cf.js",
+    "static/js/787.f37bed80.chunk.js": "/static/js/787.f37bed80.chunk.js",
+    "static/media/blackheart.png": "/static/media/blackheart.b7c6cc46e79343ab0c18.png",
+    "static/media/home.png": "/static/media/home.be246e4b68a2c5600276.png",
+    "index.html": "/index.html",
+    "main.1ef3a49a.css.map": "/static/css/main.1ef3a49a.css.map",
+    "main.f51265cf.js.map": "/static/js/main.f51265cf.js.map",
+    "787.f37bed80.chunk.js.map": "/static/js/787.f37bed80.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.1ef3a49a.css",
+    "static/js/main.f51265cf.js"
+  ]
+}

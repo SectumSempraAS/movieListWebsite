@@ -21,7 +21,7 @@ export const getMoviesSearchResult = (
         pageIndex?: number
     }):Promise<BaseTransport<MovieSearchResultTransport>> => {
 
-    return axios.get('http://www.omdbapi.com/', {
+    return axios.get('https://www.omdbapi.com/', {
         params : {
             s: searchString,
             ...(pageIndex ? {page: pageIndex} : {}),

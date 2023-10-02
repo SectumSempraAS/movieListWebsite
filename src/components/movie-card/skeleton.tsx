@@ -8,7 +8,7 @@ const SkeletonMovieCard = () => {
         <Container>
             <ImageContainer>
                 <FavButton><Skeleton height={full} width={full} borderRadius={'0.25rem'}/></FavButton>
-                <img loading='lazy' alt={'skeleton'}/>
+                <Skeleton height={full} width={full} borderRadius={'0'}/>
             </ImageContainer>
             <MovieDetailConatiner>
                 <Title><Skeleton height={full} width={full} borderRadius={'0.25rem'}/></Title>
