@@ -1,38 +1,40 @@
 # MOVIE LIST PAGE
-    1. This page loads initially with Top-10 IMDB movies when user has not searched anything yet.
-    2. Have used skeleton loader for cards as it drastically improves performance by reducing cummulative layout shift (CLS)
-    3. The navigation bar has home button, search bar and liked-movies button.
-        a.Home button will take you to the  starting page "https://solanki-julo.netlify.app/",
-            but when user is in searching and alreading using the home page, nothing will happen on home button click.
-        b.Search bar has input field and search button, search button will only work when user provides a new search query
-            For any 'invalid entry' in search input, website shows a 'Could not find results' in page title, and the fallback top-10
-            movies list is shown
-        c.Liked movies button takes us to LIKED MOVIES LIST page
-    4. When user searches any movie name, website gets list of matching named movies. 
-        a. This list is served by 'infinite scroll' (custom made by using custom made intersection observer). I have also used skeleton cards
-            for improving user experience.
-        b. Refreshing the page will take us back to the fallback list of top-10 movies. I can add query params for 
-            search query to solve this and persist the search page.
-    5. User can click on top right icon of "+" to add movies to favorites list. Clicking on it again will remove that movie from that list.
-    6. Clicking on the Movie card user will be directed to movie-detail page.
+1. This page loads initially with Top-10 IMDB movies when user has not searched anything yet.
+2. Have used skeleton loader for cards as it drastically improves performance by reducing cummulative layout shift (CLS)
+3. The navigation bar has home button, search bar and liked-movies button.
+    a.Home button will take you to the  starting page "https://solanki-julo.netlify.app/",
+        but when user is in searching and alreading using the home page, nothing will happen on home button click.
+    b.Search bar has input field and search button, search button will only work when user provides a new search query
+        For any 'invalid entry' in search input, website shows a 'Could not find results' in page title, and the fallback top-10
+        movies list is shown
+    c.Liked movies button takes us to LIKED MOVIES LIST page
+4. When user searches any movie name, website gets list of matching named movies. 
+    a. This list is served by 'infinite scroll' (custom made by using custom made intersection observer). I have also used skeleton cards
+        for improving user experience.
+    b. Refreshing the page will take us back to the fallback list of top-10 movies. I can add query params for 
+        search query to solve this and persist the search page.
+5. User can click on top right icon of "+" to add movies to favorites list. Clicking on it again will remove that movie from that list.
+6. Clicking on the Movie card user will be directed to movie-detail page.
 
 # MOVIE DETAIL PAGE
-    1. Will show details of movie.
+1. Will show details of movie.
+2. Movie posters have the button on top right to add or remove from liked-movies list.
 
 # LIKED-MOVIE LIST PAGE
-    1. Will have chosen movies, these are stored in local storage for persistence of information for users.
+1. Will have chosen movies, these are stored in local storage for persistence of information for users.
+2. Reloading will hence store the liked movies.
 
-# major challenges ###
-    Having fallback movie list work on same page with Search result  
-    Custom intersection observer and custom infinite scroll method
-    Single-page-application needs _redirection for page visits other than "/"
-    Handling Searchbar logic 
-    Skeleton observer
+# major challenges 
+1. Having fallback movie list work on same page with Search result  
+2. Custom intersection observer and custom infinite scroll method
+3. Single-page-application needs _redirection for page visits other than "/"
+4. Handling Searchbar logic 
+5. Skeleton observer
 
 # Future scopes
-    Implement query params on home page or a different searchPage to better handle user search
-    Implement logins/logouts user auth
-    Add year/rating/genre/country filters on new search/page
+1. Implement query params on home page or a different searchPage to better handle user search
+2. Implement logins/logouts user auth
+3. Add year/rating/genre/country filters on new search/page
 
 
 ### Getting Started with Create React App
