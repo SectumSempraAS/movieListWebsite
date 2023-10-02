@@ -98,7 +98,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
                 ? (    <MovieListContainer movies={movies} />
                 ) : <MovieListContainer movies={result} /> )
             }
-            <div ref={myRef}>LOADING</div>
+            <div ref={myRef}>SEARCH FOR MORE</div>
             {isLoading && <Loader />}
             {/* {movies?.length && 
             <PaginationBar>
