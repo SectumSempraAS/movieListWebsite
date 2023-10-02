@@ -47,9 +47,6 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     },[searchQuery])
 
     const custom = (shouldPaginate: boolean) => {
-        console.log('pageNumber', pageNumber)
-        console.log('lastPageNumber', lastPageNumber)
-        console.log('resultSize', resultSize)
         if(shouldPaginate && pageNumber <= lastPageNumber) setPageNumber(prevPageNumber => prevPageNumber + 1)
     }
 
@@ -61,7 +58,6 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     }
 
     useEffect(() => {
-        console.log(pageNumber)
         if(searchQuery && pageNumber <= lastPageNumber) {
             setIsLoading(true)
             getMoviesSearchResult({searchString: searchQuery, pageIndex: pageNumber})
@@ -104,8 +100,8 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     },[])
 
     // console.log(searchQuery)
-    console.log('pageNumber', pageNumber)
-    console.log('LASTpageNumber', lastPageNumber)
+    // console.log('pageNumber', pageNumber)
+    // console.log('LASTpageNumber', lastPageNumber)
     // console.log('isLoading', isLoading)
 
     return (

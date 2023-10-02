@@ -7,7 +7,6 @@ import { MediaTransport } from "../../transports"
 import { FavMoviesContext } from "../../contexts/favMoviesContext"
 import { FavButton } from "../movie-card/styles"
 import Navbar from "../navbar"
-import { InnerContainer } from "../navbar-styles"
 
 const DEFAULT_ID = 'tt0111161'
 
@@ -43,6 +42,7 @@ const MovieDetailPage = () => {
     .then((res) => {
       setMovideData(res.data)
     })
+    .catch((error) => console.log(error))
   },[movieId])
 
   const toggleFavourite = (e:any) => {
