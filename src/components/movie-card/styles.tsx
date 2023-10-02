@@ -130,7 +130,13 @@ export const Skeleton = styled.div<SkeletonProps>(
             0% {
                 opacity: 0.6;
             }
+            25% {
+                opacity: 0.4;
+            }
             50% {
+                opacity: 0.2;
+            }
+            75% {
                 opacity: 0.4;
             }
             100% {

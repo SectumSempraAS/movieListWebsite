@@ -2,12 +2,13 @@ import {FC, useCallback, useEffect, useMemo, useState, useRef} from 'react';
 
 import { MediaTransport } from '../../transports';
 // import { useGetTopMoviesList } from './hooks';
-import { Container, Loader, NextPageButton, PageIndex, PageTitle, PaginationBar, PrevPageButton } from './styles';
+import { Container, Loader, PageTitle } from './styles';
 import topMovieIdsList from "../../idList.json"
 import { useGetTopMoviesList } from './hooks';
 import Navbar from '../navbar';
 import { getMoviesSearchResult } from '../../client';
 import MovieListContainer from './listContainer';
+import SkeletonListContainer from './skeletonListContainer';
 
 const PAGE_SIZE = 10;
 
@@ -30,6 +31,7 @@ const MovieListPage:FC<MovieListPageProps> = () => {
     const [resultSize, setResultSize] = useState<number>(0)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [lastElementVisible, setLastElementVisible] = useState<boolean>(false)
+    const [isResultLoading, setIsResultLoading] = useState<boolean>(true)
     const lastPageNumber = 
     useMemo(() => { return Math.ceil(resultSize/PAGE_SIZE) + 1 }, [resultSize])
     const myRef = useRef<HTMLInputElement>(null)
@@ -79,6 +81,10 @@ const MovieListPage:FC<MovieListPageProps> = () => {
         observer.observe(myRef.current!)
     },[])
 
+    useEffect(() => {
+        setTimeout(() => setIsResultLoading(false),300)
+    },[])
+
     // console.log(searchQuery)
     // console.log('pageNumber', pageNumber)
     console.log('isLoading', isLoading)
@@ -87,9 +93,11 @@ const MovieListPage:FC<MovieListPageProps> = () => {
         <Container>
             <Navbar changeSearchQuery={changeSearchQuery}/>
             <PageTitle>{pageTitle}</PageTitle>
-            {movies?.length ? (
-                <MovieListContainer movies={movies} />
-            ) : <MovieListContainer movies={result} /> }
+            {isResultLoading ? <SkeletonListContainer />
+            : (movies?.length 
+                ? (    <MovieListContainer movies={movies} />
+                ) : <MovieListContainer movies={result} /> )
+            }
             <div ref={myRef}>LOADING</div>
             {isLoading && <Loader />}
             {/* {movies?.length && 

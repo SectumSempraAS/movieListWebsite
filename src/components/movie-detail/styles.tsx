@@ -18,9 +18,12 @@ export const Container = styled.div(
         font-size: 14px;
         background-color: black;
         color: white
+        width: 100%
 
         @media only screen and (min-width: 768px) {
-            flex-direction: row;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 12px;
         }
     `,
 )

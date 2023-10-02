@@ -15,7 +15,7 @@ const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
     const [isLoading, setIsLoading] = useState<boolean>(true)
     const {favMoviesIdList, setFavMoviesIdList} = useContext(FavMoviesContext)
     const _likedButtontext = useMemo(() => isLiked ? '✓' : '+' , [isLiked]) 
-    const navigate = useNavigate();
+    const navigation = useNavigate();
 
     const toggleFavourite = (e:any) => {
         e.stopPropagation();
@@ -32,7 +32,7 @@ const MovieCard:FC<MovieCardProps> = ({movie, isLiked = false}) => {
     }
 
     const navigateToDetailPage = () => {
-        navigate(`movieDetail/${movie.imdbID}`)
+        navigation(`/movieDetail/${movie.imdbID}`)
     }
 
     useEffect(() => {
