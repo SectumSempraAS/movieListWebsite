@@ -60,7 +60,7 @@ const MovieDetailPage = () => {
     }
 }
 
-  console.log(movieData)
+  // console.log(movieData)
 
   return (
     <OuterContainer>
