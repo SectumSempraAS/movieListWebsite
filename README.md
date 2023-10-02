@@ -3,7 +3,7 @@
     2. Have used skeleton loader for cards as it drastically improves performance by reducing cummulative layout shift (CLS)
     3. The navigation bar has home button, search bar and liked-movies button.
         a.Home button will take you to the  starting page "https://solanki-julo.netlify.app/",
-            but when user is in searching and alreading using the home page, nothing will happen
+            but when user is in searching and alreading using the home page, nothing will happen on home button click.
         b.Search bar has input field and search button, search button will only work when user provides a new search query
             For any 'invalid entry' in search input, website shows a 'Could not find results' in page title, and the fallback top-10
             movies list is shown
@@ -21,6 +21,18 @@
 
 # LIKED-MOVIE LIST PAGE
     1. Will have chosen movies, these are stored in local storage for persistence of information for users.
+
+### major challenges ###
+## Having fallback movie list work on same page with Search result  
+## Custom intersection observer and custom infinite scroll method
+## Single-page-application needs _redirection for page visits other than "/"
+## Handling Searchbar logic 
+## Skeleton observer
+
+### Future scopes
+## Implement query params on home page or a different searchPage to better handle user search
+## Implement logins/logouts user auth
+## Add year/rating/genre/country filters on new search/page
 
 
 # Getting Started with Create React App
