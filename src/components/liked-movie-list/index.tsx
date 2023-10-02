@@ -5,11 +5,12 @@ import { BaseTransport, MediaTransport } from "../../transports"
 import MovieListContainer from "../movie-list/listContainer"
 import { Container, EmptyMovieList, PageTitle } from "./styles"
 import Navbar from "../navbar"
+import SkeletonListContainer from "../movie-list/skeletonListContainer"
 
 export const LikedMovieList = () => {
     const {favMoviesIdList} = useContext(FavMoviesContext)
     const [likedMovies, setlikedMovies] = useState<MediaTransport[]>([])
-    console.log(favMoviesIdList)
+    const [isLoading, setIsLoading] = useState<boolean>(true)
 
     useEffect(() => {
         let promiseArray: Promise<BaseTransport<MediaTransport>>[] = []
@@ -18,10 +19,10 @@ export const LikedMovieList = () => {
         })
         Promise.all(promiseArray)
         .then((responses) => {
-            console.log(responses)
-            responses.forEach((res) => [
+            responses.forEach((res) => {
                 setlikedMovies(likedMovies => [...likedMovies, res.data])
-            ])
+            })
+            setIsLoading(false)
         })
         .catch((error) => console.log(error))
     },[])
@@ -30,10 +31,13 @@ export const LikedMovieList = () => {
         <Container>
             <Navbar showNavBar={false}/>   
             <PageTitle>YOUR FAVOURITE MOVIES</PageTitle>
-            {!!likedMovies && likedMovies.length > 0 
-                ? <MovieListContainer movies={likedMovies} />
-                : <EmptyMovieList>No Favourite movies as of Now!</EmptyMovieList>
-            }
+            {isLoading ?
+                <SkeletonListContainer/>
+                : (!!likedMovies && likedMovies.length > 0 
+                    ? <MovieListContainer movies={likedMovies} />
+                    : <EmptyMovieList>No Favourite movies as of Now!</EmptyMovieList>
+                )}
+            
         </Container>
     )
 }

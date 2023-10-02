@@ -15,6 +15,13 @@ export const PageTitle = styled.h1(
     () => css`
         display: flex;
         font-size: 1.25rem;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 1.5rem;
+        }
+        @media only screen and (min-width: 1024px) {
+            font-size: 2rem;
+        }
     `,
 )
 
