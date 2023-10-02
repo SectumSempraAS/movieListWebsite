@@ -22,24 +22,24 @@
 # LIKED-MOVIE LIST PAGE
     1. Will have chosen movies, these are stored in local storage for persistence of information for users.
 
-### major challenges ###
-## Having fallback movie list work on same page with Search result  
-## Custom intersection observer and custom infinite scroll method
-## Single-page-application needs _redirection for page visits other than "/"
-## Handling Searchbar logic 
-## Skeleton observer
+# major challenges ###
+    Having fallback movie list work on same page with Search result  
+    Custom intersection observer and custom infinite scroll method
+    Single-page-application needs _redirection for page visits other than "/"
+    Handling Searchbar logic 
+    Skeleton observer
 
-### Future scopes
-## Implement query params on home page or a different searchPage to better handle user search
-## Implement logins/logouts user auth
-## Add year/rating/genre/country filters on new search/page
+# Future scopes
+    Implement query params on home page or a different searchPage to better handle user search
+    Implement logins/logouts user auth
+    Add year/rating/genre/country filters on new search/page
 
 
-# Getting Started with Create React App
+### Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+### Available Scripts
 
 In the project directory, you can run:
 
