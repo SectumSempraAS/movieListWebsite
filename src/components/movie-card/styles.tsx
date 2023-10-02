@@ -20,7 +20,8 @@ export const ImageContainer = styled.div(
     () => css`
         display: block;
         height: 180px;
-        width: 125px;
+        width: 118px;
+        padding: 0.3rem 0.5rem;
         & > img {
             object-fit: cover;
             height: 100%;
@@ -28,13 +29,13 @@ export const ImageContainer = styled.div(
         }
 
         @media only screen and (min-width: 768px) {
-            height: 330px;
-            width: 210px;
+            height: 250px;
+            width: 140px;
         }
 
         @media only screen and (min-width: 768px) {
             height: 330px;
-            width: 230px;
+            width: 210px;
         }
     `,
 )
@@ -45,6 +46,16 @@ export const Title = styled.div(
         font-weight: 700;
         width: 100%;
         line-height: 1rem;
+        margin: 12px 0;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 20px;
+            line-height: 1.5rem;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            font-size: 24px;
+        }
     `,
 )
 
@@ -52,12 +63,24 @@ export const MovieDetailConatiner = styled.div(
     () => css`
         display: flex;
         flex-direction: column;
-        justify-content: end;
+        justify-content: center;
         font-size: 14px;
         padding: 0.3rem 0.5rem;
+        width: 118px;
+        height: 120px;
 
         & > span {
             color: #a2a3a2;
+        }
+
+        @media only screen and (min-width: 768px) {
+            width: 140px;
+            height: 150px;
+        }
+
+        @media only screen and (min-width: 1024px) {
+            width: 210px;
+            height: 180px;
         }
     `,
 )

@@ -73,9 +73,12 @@ export const ListContainer = styled.div(
         grid-template-columns: 1fr 1fr;
         gap: 20px 12px;
         padding: 0.5rem 1rem;
-        max-width: 1000px;
+        max-width: 1200px;
         background-color: #000000;
 
+        @media only screen and (min-width: 500px) {
+            grid-template-columns: 1fr 1fr 1fr;
+        }    
         @media only screen and (min-width: 768px) {
             grid-template-columns: 1fr 1fr 1fr;
         }
