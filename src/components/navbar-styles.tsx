@@ -8,6 +8,10 @@ export const Container = styled.div(
         width: 100%;
         justify-content: center;
         padding: 0;
+        position: sticky;
+        z-index: 5;
+        top: 0;
+        border-bottom: 1px solid #fabd07;
     `,
 )
 
